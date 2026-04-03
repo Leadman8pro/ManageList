@@ -5,7 +5,7 @@ import io
 import re
 import sqlite3
 from werkzeug.security import generate_password_hash, check_password_hash
-from aws_ec2_config import load_ec2_config, is_ec2_configured
+
 
 app = Flask(__name__, template_folder=".", static_folder=".", static_url_path="")
 app.secret_key = "1fedfsfs@@./addfs12456d"
@@ -13,7 +13,6 @@ DB_PATH = "app.db"
 ADMIN_EMAIL = "admin@managelist.com"
 ADMIN_NAME = "Administrator"
 ADMIN_PASSWORD = "Admin12345!"
-AWS_EC2_CONFIG = load_ec2_config()
 datos = [10, 20, 30]
 
 
@@ -29,15 +28,6 @@ def is_admin_session():
 
 def is_authenticated():
     return bool(session.get("display_name"))
-
-
-def get_ec2_connection_space():
-    """Punto unico para conectar la app con EC2 cuando se implemente esa integracion."""
-    return {
-        "provider": "aws_ec2",
-        "configured": is_ec2_configured(AWS_EC2_CONFIG),
-        "settings": AWS_EC2_CONFIG,
-    }
 
 
 def validate_device_payload(device_name, mac_address, location, assigned_user, ip_address, status):
@@ -1003,5 +993,5 @@ def logout():
 
 if __name__ == "__main__":
     init_db()
-    app.run(debug=True)
+    app.run(host="0.0.0.0" , port=5000, debug=True)
 
