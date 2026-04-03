@@ -1,0 +1,13 @@
+Para activar el entorno =  c:\Users\maiso\OneDrive\Desktop\Comp465-Final\Proyecto\.venv\Scripts\Activate.ps1
+Para desactivar = deactivate
+Para guardar dependencias = pip freeze > requirements.txt
+Para ver dependencias dentro del entorno = pip list
+Para ver dependencias especificas de = pip show flask
+Para instalar dependendencias = pip install -r requirements.txt
+
+Para proteger la web uso flask
+iniciar con flask es: python main.py
+
+
+
+Parametros de intentos de password

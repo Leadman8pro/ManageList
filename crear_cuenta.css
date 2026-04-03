@@ -1,0 +1,111 @@
+/* Estilo general del cuerpo */
+body {
+    font-family: Arial, sans-serif;
+    background-color: #f0f0f0;
+    margin: 0;
+    padding: 0;
+}
+
+/* Contenedor principal del portafolio */
+.portafolio {
+    text-align: center;
+    background-color: #4CAF50;
+    color: white;
+    padding: 20px;
+    margin-bottom: 20px;
+}
+
+/* Estilo del encabezado */
+.header {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+    background-color: #333;
+    padding: 10px 20px;
+    color: white;
+}
+
+.header .logo {
+    font-size: 24px;
+    font-weight: bold;
+}
+
+.navigation a {
+    color: white;
+    text-decoration: none;
+    margin: 0 15px;
+    font-size: 18px;
+}
+
+.navigation a:hover {
+    text-decoration: underline;
+}
+
+/* Estilo de la fila (si usas más contenido) */
+.row {
+    margin: 20px;
+    padding: 10px;
+    background-color: white;
+    box-shadow: 0 2px 4px rgba(0, 0, 0, 0.1);
+}
+
+/* Imagen y mapa */
+img {
+    max-width: 100%;
+    height: auto;
+    display: block;
+    margin: 20px auto;
+}
+
+map area {
+    cursor: pointer;
+}
+
+/* Formulario en diseño vertical */
+.formulario {
+    background-color: #ffffff;
+    padding: 20px;
+    border-radius: 8px;
+    box-shadow: 0 4px 6px rgba(0, 0, 0, 0.1);
+    width: 300px;
+    margin: 20px auto; /* Centra el formulario */
+    text-align: left; /* Alinea el contenido a la izquierda */
+}
+
+.formulario h2 {
+    text-align: center; /* Centra el encabezado */
+    color: #333;
+    margin-bottom: 20px;
+}
+
+.formulario label {
+    display: block; /* Asegura que cada etiqueta esté en su propia línea */
+    margin-top: 10px;
+    font-weight: bold;
+    color: #555;
+}
+
+.formulario input, 
+.formulario select, 
+.formulario button {
+    width: 100%; /* Hace que los elementos llenen el ancho del formulario */
+    padding: 10px;
+    margin-top: 5px;
+    margin-bottom: 15px;
+    border: 1px solid #ccc;
+    border-radius: 4px;
+    font-size: 14px;
+}
+
+.formulario button {
+    background-color: #4CAF50;
+    color: white;
+    font-size: 16px;
+    border: none;
+    cursor: pointer;
+    text-align: center;
+}
+
+.formulario button:hover {
+    background-color: #45a049;
+}

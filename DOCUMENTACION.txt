@@ -1,0 +1,84 @@
+# Documentacion del Proyecto
+
+## 1. Resumen
+Aplicacion web en Flask con:
+- Dashboard (`main.html`) con graficas Chart.js.
+- Login (`log.html`).
+- Crear cuenta (`crear_cuenta.html`).
+- Persistencia en SQLite (`app.db`).
+
+## 2. Tecnologias
+- Python 3
+- Flask 3.1.2
+- SQLite (modulo `sqlite3` incluido en Python)
+- HTML/CSS
+- Chart.js (CDN)
+
+## 3. Estructura principal
+- `main.py`: servidor Flask y logica backend.
+- `main.html`: dashboard principal.
+- `main.css`: estilos del dashboard.
+- `log.html` + `logging.css`: pantalla de login.
+- `crear_cuenta.html` + `crear_cuenta.css`: registro.
+- `app.db`: base de datos SQLite.
+- `requirements.txt`: dependencias Python.
+
+## 4. Instalacion y ejecucion
+Desde PowerShell:
+
+```powershell
+cd "c:\Users\maiso\OneDrive\Desktop\Comp465-Final\Proyecto"
+.\.venv\Scripts\Activate.ps1
+python -m pip install -r requirements.txt
+python main.py
+```
+
+Abrir en navegador:
+- `http://127.0.0.1:5000/`
+
+## 5. Credenciales de administrador (fijas)
+Definidas en `main.py`:
+- Email: `admin@managelist.com`
+- Password: `Admin12345!`
+- Nombre mostrado: `Administrator`
+
+Comportamiento:
+- El admin se crea/actualiza automaticamente en cada arranque (`init_db()`).
+- No se permite registrar ese correo desde crear cuenta.
+
+## 6. Base de datos SQLite
+Archivo:
+- `Proyecto/app.db`
+
+Tabla:
+- `users(id, nombre, email, password_hash)`
+
+Notas:
+- `email` es unico.
+- `password_hash` se guarda con `werkzeug.security.generate_password_hash`.
+
+## 7. Rutas del backend
+- `GET /` -> dashboard.
+- `GET /logging` -> login.
+- `GET /crear_cuenta` -> registro.
+- `GET /logout` -> limpia sesion.
+- `GET /datos` -> datos JSON de grafica.
+- `GET /cambiar` -> cambia datos JSON de grafica.
+- `POST /submit` -> crea cuenta.
+- `POST /login` -> valida login.
+
+## 8. Flujo funcional
+1. Usuario crea cuenta en `/crear_cuenta`.
+2. Login en `/logging`.
+3. Si login correcto:
+   - Guarda nombre en `session["display_name"]`.
+   - Si email admin, muestra `Administrator`.
+4. Dashboard muestra `Usuario: <display_name>`.
+5. Logout limpia sesion.
+
+## 9. Seguridad aplicada
+- Validacion basica de email (regex).
+- Longitud minima de contrasena (8).
+- Passwords hasheadas (no texto plano).
+- Consultas SQL parametrizadas.
+- Sesion para identificar usuario activo.

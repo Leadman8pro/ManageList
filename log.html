@@ -1,0 +1,55 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta http-equiv="X-UA-Compatible" content="IE=edge">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>ManageList | Login</title>
+    <link rel="stylesheet" href="{{ url_for('static', filename='logging.css') }}">
+</head>
+<body>
+    <header class="topbar">
+        <div class="topbar-inner">
+            <h2 class="logo">ManageList</h2>
+            <nav class="navigation">
+                <a href="{{ url_for('logging_page') }}">Login</a>
+            </nav>
+        </div>
+    </header>
+
+    <main class="page">
+        <div class="page-header">
+            <h1>Iniciar sesion</h1>
+            <p>Accede al dashboard para revisar dispositivos, servidores y activos NFV.</p>
+        </div>
+
+        <div class="content-grid">
+            <div class="flash-wrap">
+                {% with messages = get_flashed_messages() %}
+                {% if messages %}
+                <div class="flash-card">
+                    {% for message in messages %}
+                    <p>{{ message }}</p>
+                    {% endfor %}
+                </div>
+                {% endif %}
+                {% endwith %}
+
+                <section class="formulario">
+                    <h2>Login</h2>
+                    <p class="meta">Introduce tus credenciales para continuar.</p>
+                    <form action="{{ url_for('login') }}" method="post">
+                        <label for="email">Correo electronico</label>
+                        <input type="email" id="email" name="email" placeholder="usuario@empresa.com" required>
+
+                        <label for="password">Contrasena</label>
+                        <input type="password" id="password" name="password" placeholder="Tu contrasena" required>
+
+                        <button type="submit">Entrar</button>
+                    </form>
+                </section>
+            </div>
+        </div>
+    </main>
+</body>
+</html>
