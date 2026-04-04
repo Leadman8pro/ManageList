@@ -3,10 +3,10 @@
 <html lang="en">
 <head>
     <!-- Metadatos importantes -->
-    <meta charset="UTF-8"> <!-- CodificaciÃ³n de caracteres en UTF-8 -->
+    <meta charset="UTF-8"> <!-- Codificacion de caracteres en UTF-8 -->
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <!-- Hace que la pÃ¡gina sea responsiva en dispositivos mÃ³viles -->
-    <title>ManageList</title> <!-- TÃ­tulo de la pÃ¡gina que aparece en la pestaÃ±a del navegador -->
+    <!-- Hace que la pagina sea responsiva en dispositivos moviles -->
+    <title>ManageList</title> <!-- Ti­tulo de la pagina que aparece en la pestana del navegador -->
     
     <!-- Enlace a la hoja de estilos CSS ubicada en la carpeta 'static' del proyecto Flask -->
     <link rel="stylesheet" href="{{ url_for('static', filename='main.css') }}">
@@ -17,28 +17,28 @@
         <!-- Barra de navegaciÃ³n superior -->
         <nav id="nav-bar">
             <ul>
-                <!-- MenÃº principal con acciones comunes -->                <!-- Mostrar nombre de usuario dinÃ¡micamente con Flask -->
+                <!-- Menu principal con acciones comunes -->                <!-- Mostrar nombre de usuario dinamicamente con Flask -->
                 <li class="nav-dropdown">
                     <details class="nav-dropdown-details">
-                        <summary class="nav-dropdown-toggle">download</summary>
+                        <summary class="nav-dropdown-toggle">Download</summary>
                         <div class="nav-dropdown-menu">
-                        <a href="{{ url_for('download_devices') }}">devices.csv</a>
-                        <a href="{{ url_for('download_servers') }}">servers.csv</a>
-                        <a href="{{ url_for('download_nfv') }}">nfv.csv</a>
+                        <a href="{{ url_for('download_devices') }}">Devices.csv</a>
+                        <a href="{{ url_for('download_servers') }}">Servers.csv</a>
+                        <a href="{{ url_for('download_nfv') }}">NFV.csv</a>
                         {% if is_admin %}
-                        <a href="{{ url_for('download_users') }}">users.csv</a>
+                        <a href="{{ url_for('download_users') }}">Users.csv</a>
                         {% endif %}
                         </div>
                     </details>
                 </li>
                 <li>Usuario: {{ display_name }}</li>
-                <!-- Enlaces a otras pÃ¡ginas -->
-                <li><a href="{{ url_for('logging_page') }}">logging</a></li>
-                <li><a href="{{ url_for('logout') }}">logout</a></li>
+                <!-- Enlaces a otras paginas -->
+                <li><a href="{{ url_for('logging_page') }}">Iniciar</a></li>
+                <li><a href="{{ url_for('logout') }}">Cerrar Sesión</a></li>
             </ul>
         </nav>
 
-        <!-- Segunda barra de navegaciÃ³n para la gestiÃ³n de listas -->
+        <!-- Segunda barra de navegacion para la gestion de listas -->
         <nav id="manage_list">
             <ul>
                 <li>ManageList</li>
@@ -50,15 +50,15 @@
         </nav>
     </header>
 
-    <!-- SecciÃ³n principal tipo dashboard con tarjetas de informaciÃ³n -->
+    <!-- Seccion principal tipo dashboard con tarjetas de informacion -->
     <section id="dashboard">
         <div class="cards-container">
             <!-- Tarjeta 1: Devices -->
             <div class="card">
                 <h3>Devices</h3>
-                <p class="meta">General status of devices</p>
+                <p class="meta">Status general de los dispositivos</p>
                 <div class="chart-wrap">
-                    <!-- Canvas para la grÃ¡fica de dispositivos -->
+                    <!-- Canvas para la grafica de dispositivos -->
                     <canvas id="grafica1" data-online="{{ online_count }}" data-offline="{{ offline_count }}"></canvas>
                 </div>
             </div>
@@ -66,9 +66,9 @@
             <!-- Tarjeta 2: Servers -->
             <div class="card">
                 <h3>Servers</h3>
-                <p class="meta">Allocate Servers</p>
+                <p class="meta">Status de los servidores</p>
                 <div class="chart-wrap">
-                    <!-- Canvas para la grÃ¡fica de servidores -->
+                    <!-- Canvas para la grafica de servidores -->
                     <canvas id="grafica2" data-online="{{ server_online_count }}" data-offline="{{ server_offline_count }}"></canvas>
                 </div>
             </div>
@@ -78,7 +78,7 @@
                 <h3>NFV</h3>
                 <p class="meta">Network Function Virtual</p>
                 <div class="chart-wrap">
-                    <!-- Canvas para la grÃ¡fica de NFV -->
+                    <!-- Canvas para la grafica de NFV -->
                     <canvas id="grafica3" data-router="{{ nfv_router_count }}" data-switch="{{ nfv_switch_count }}"></canvas>
                 </div>
             </div>
@@ -97,31 +97,31 @@
         {% if is_admin %}
         <div class="dashboard-admin-panel">
             <div class="section-heading">
-                <h2>User Accounts</h2>
-                <p>Solo el administrador puede crear, editar y eliminar cuentas desde esta zona.</p>
+                <h2>Cuentas de Usuarios</h2>
+                <p>Solo el Admin maneja esta sección por motivos de seguridad.</p>
             </div>
 
             <div class="devices-layout">
                 <div class="form-card">
                     <h3>{% if edit_user %}Edit user{% else %}Add user{% endif %}</h3>
-                    <p class="meta">La cuenta creada no inicia sesion automaticamente.</p>
+                    <p class="meta">Sección para crear la cuenta de los usuarios.</p>
                     <form
                         class="device-form"
                         action="{% if edit_user %}{{ url_for('update_user', user_id=edit_user['id']) }}{% else %}{{ url_for('create_user') }}{% endif %}"
                         method="post"
                     >
-                        <label for="user_name">Name</label>
+                        <label for="user_name">Nombre</label>
                         <input id="user_name" name="nombre" type="text" maxlength="80" value="{{ edit_user['nombre'] if edit_user else '' }}" required>
 
                         <label for="user_email">Email</label>
                         <input id="user_email" name="email" type="email" maxlength="120" value="{{ edit_user['email'] if edit_user else '' }}" required>
 
-                        <label for="user_password">{% if edit_user %}New Password{% else %}Password{% endif %}</label>
+                        <label for="user_password">{% if edit_user %}Nuevo Password{% else %}Password{% endif %}</label>
                         <input id="user_password" name="password" type="password" minlength="8" {% if not edit_user %}required{% endif %}>
 
-                        <button type="submit">{% if edit_user %}Save changes{% else %}Create user{% endif %}</button>
+                        <button type="submit">{% if edit_user %}Save changes{% else %}Crear Usuario{% endif %}</button>
                         {% if edit_user %}
-                        <a class="secondary-link" href="{{ url_for('index', _anchor='dashboard') }}">Cancel edit</a>
+                        <a class="secondary-link" href="{{ url_for('index', _anchor='dashboard') }}">Cancelar edit</a>
                         {% endif %}
                     </form>
                 </div>
@@ -130,10 +130,10 @@
                     <table id="users_table">
                         <thead>
                             <tr>
-                                <th>Name</th>
+                                <th>Nombre</th>
                                 <th>Email</th>
                                 <th>Role</th>
-                                <th>Actions</th>
+                                <th>Acción</th>
                             </tr>
                         </thead>
                         <tbody>
@@ -144,7 +144,7 @@
                                 <td>{% if user["email"] == "admin@managelist.com" %}Administrator{% else %}User{% endif %}</td>
                                 <td class="actions-cell">
                                     {% if user["email"] == "admin@managelist.com" %}
-                                    <span class="table-action disabled">Protected</span>
+                                    <span class="table-action disabled">Protected=</span>
                                     {% else %}
                                     <a class="table-action" href="{{ url_for('index', _anchor='dashboard', edit_user=user['id']) }}">Edit</a>
                                     <form class="inline-form" action="{{ url_for('delete_user', user_id=user['id']) }}" method="post">
@@ -155,7 +155,7 @@
                             </tr>
                             {% else %}
                             <tr>
-                                <td colspan="4" class="empty-row">No users registered yet.</td>
+                                <td colspan="4" class="empty-row">Usuario no se a registrado.</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -166,7 +166,7 @@
         {% endif %}
     </section>
 
-    <!-- Secciones vacÃ­as para contenido dinÃ¡mico o futuro -->
+    <!-- Secciones para contenido dinamico -->
     <section id="devices" class="content-section">
         <div class="section-shell">
             <div class="section-heading">
@@ -186,23 +186,23 @@
                     type="text"
                     name="device_q"
                     value="{{ device_q }}"
-                    placeholder="Search by device, MAC, IP or user"
+                    placeholder="Buscar por MAC, IP o usuario"
                 >
                 <select name="device_status">
-                    <option value="" {% if not device_status %}selected{% endif %}>All status</option>
+                    <option value="" {% if not device_status %}selected{% endif %}>Todos los status</option>
                     <option value="Online" {% if device_status == 'Online' %}selected{% endif %}>Online</option>
                     <option value="Offline" {% if device_status == 'Offline' %}selected{% endif %}>Offline</option>
                 </select>
-                <button type="submit">Filter</button>
+                <button type="submit">Filtrar</button>
                 {% if device_q or device_status %}
-                <a class="secondary-link" href="{{ url_for('index', _anchor='devices') }}">Clear</a>
+                <a class="secondary-link" href="{{ url_for('index', _anchor='devices') }}">Limpiar</a>
                 {% endif %}
             </form>
 
             <div class="devices-layout{% if not is_admin %} devices-layout--viewer{% endif %}">
                 {% if is_admin %}
                 <div class="form-card">
-                    <h3>{% if edit_device %}Edit device{% else %}Add device{% endif %}</h3>
+                    <h3>{% if edit_device %}Editar device{% else %}Anadir device{% endif %}</h3>
                     <p class="meta">Carga manual para nuevos equipos del cliente.</p>
                     <form
                         class="device-form"
@@ -231,7 +231,7 @@
                             required
                         >
 
-                        <label for="location">Locate</label>
+                        <label for="location">Ubicación</label>
                         <input
                             id="location"
                             name="location"
@@ -242,7 +242,7 @@
                             required
                         >
 
-                        <label for="assigned_user">User</label>
+                        <label for="assigned_user">Usuario</label>
                         <input
                             id="assigned_user"
                             name="assigned_user"
@@ -270,7 +270,7 @@
                             <option value="Offline" {% if edit_device and edit_device['status'] == 'Offline' %}selected{% endif %}>Offline</option>
                         </select>
 
-                        <button type="submit">{% if edit_device %}Save changes{% else %}Add device{% endif %}</button>
+                        <button type="submit">{% if edit_device %}Guardar Cambios{% else %}Añadir dispositivo{% endif %}</button>
                         {% if edit_device %}
                         <a class="secondary-link" href="{{ url_for('index', _anchor='devices') }}">Cancel edit</a>
                         {% endif %}
@@ -317,7 +317,7 @@
                             </tr>
                             {% else %}
                             <tr>
-                                <td colspan="{% if is_admin %}7{% else %}6{% endif %}" class="empty-row">No devices registered yet.</td>
+                                <td colspan="{% if is_admin %}7{% else %}6{% endif %}" class="empty-row">No se ha registrado todavia.</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -346,14 +346,14 @@
                     type="text"
                     name="server_q"
                     value="{{ server_q }}"
-                    placeholder="Search by server, hostname, OS or role"
+                    placeholder="Buscar por Server, hostname, OS o role"
                 >
                 <select name="server_status">
-                    <option value="" {% if not server_status %}selected{% endif %}>All status</option>
+                    <option value="" {% if not server_status %}selected{% endif %}>Todos los Status</option>
                     <option value="Online" {% if server_status == 'Online' %}selected{% endif %}>Online</option>
                     <option value="Offline" {% if server_status == 'Offline' %}selected{% endif %}>Offline</option>
                 </select>
-                <button type="submit">Filter</button>
+                <button type="submit">Filtrar</button>
                 {% if server_q or server_status %}
                 <a class="secondary-link" href="{{ url_for('index', _anchor='server') }}">Clear</a>
                 {% endif %}
@@ -362,7 +362,7 @@
             <div class="devices-layout{% if not is_admin %} devices-layout--viewer{% endif %}">
                 {% if is_admin %}
                 <div class="form-card">
-                    <h3>{% if edit_server %}Edit server{% else %}Add server{% endif %}</h3>
+                    <h3>{% if edit_server %}Editar server{% else %}Añadir server{% endif %}</h3>
                     <p class="meta">Carga manual para servidores del cliente.</p>
                     <form
                         class="device-form"
@@ -393,9 +393,9 @@
                             <option value="Offline" {% if edit_server and edit_server['status'] == 'Offline' %}selected{% endif %}>Offline</option>
                         </select>
 
-                        <button type="submit">{% if edit_server %}Save changes{% else %}Add server{% endif %}</button>
+                        <button type="submit">{% if edit_server %}Guardar Cambios{% else %}Añadir server{% endif %}</button>
                         {% if edit_server %}
-                        <a class="secondary-link" href="{{ url_for('index', _anchor='server') }}">Cancel edit</a>
+                        <a class="secondary-link" href="{{ url_for('index', _anchor='server') }}">Cancelar edit</a>
                         {% endif %}
                     </form>
                 </div>
@@ -436,7 +436,7 @@
                             </tr>
                             {% else %}
                             <tr>
-                                <td colspan="{% if is_admin %}7{% else %}6{% endif %}" class="empty-row">No servers registered yet.</td>
+                                <td colspan="{% if is_admin %}7{% else %}6{% endif %}" class="empty-row">No se han registrado servidores</td>
                             </tr>
                             {% endfor %}
                         </tbody>
@@ -468,7 +468,7 @@
                     placeholder="Search by asset, vendor, model or management IP"
                 >
                 <select name="nfv_type">
-                    <option value="" {% if not nfv_type %}selected{% endif %}>All types</option>
+                    <option value="" {% if not nfv_type %}selected{% endif %}>Todos los tipos</option>
                     <option value="Router" {% if nfv_type == 'Router' %}selected{% endif %}>Router</option>
                     <option value="Switch" {% if nfv_type == 'Switch' %}selected{% endif %}>Switch</option>
                 </select>
@@ -477,38 +477,38 @@
                     <option value="Online" {% if nfv_status == 'Online' %}selected{% endif %}>Online</option>
                     <option value="Offline" {% if nfv_status == 'Offline' %}selected{% endif %}>Offline</option>
                 </select>
-                <button type="submit">Filter</button>
+                <button type="submit">Filtrar</button>
                 {% if nfv_q or nfv_status or nfv_type %}
-                <a class="secondary-link" href="{{ url_for('index', _anchor='devices-software') }}">Clear</a>
+                <a class="secondary-link" href="{{ url_for('index', _anchor='devices-software') }}">Limpiar</a>
                 {% endif %}
             </form>
 
             <div class="devices-layout{% if not is_admin %} devices-layout--viewer{% endif %}">
                 {% if is_admin %}
                 <div class="form-card">
-                    <h3>{% if edit_nfv %}Edit NFV asset{% else %}Add NFV asset{% endif %}</h3>
+                    <h3>{% if edit_nfv %}Editar NFV asset{% else %}Añadir NFV asset{% endif %}</h3>
                     <p class="meta">Carga manual para routers y switches del cliente.</p>
                     <form
                         class="device-form"
                         action="{% if edit_nfv %}{{ url_for('update_nfv', nfv_id=edit_nfv['id']) }}{% else %}{{ url_for('create_nfv') }}{% endif %}"
                         method="post"
                     >
-                        <label for="asset_name">Asset</label>
+                        <label for="asset_name">Nombre de dispositivo</label>
                         <input id="asset_name" name="asset_name" type="text" maxlength="80" value="{{ edit_nfv['asset_name'] if edit_nfv else '' }}" required>
 
-                        <label for="asset_type">Type</label>
+                        <label for="asset_type">Tipo</label>
                         <select id="asset_type" name="asset_type" required>
                             <option value="Router" {% if edit_nfv and edit_nfv['asset_type'] == 'Router' %}selected{% endif %}>Router</option>
                             <option value="Switch" {% if edit_nfv and edit_nfv['asset_type'] == 'Switch' %}selected{% endif %}>Switch</option>
                         </select>
 
-                        <label for="vendor">Vendor</label>
+                        <label for="vendor">Vendedor</label>
                         <input id="vendor" name="vendor" type="text" maxlength="80" value="{{ edit_nfv['vendor'] if edit_nfv else '' }}" required>
 
-                        <label for="model">Model</label>
+                        <label for="model">Modelo</label>
                         <input id="model" name="model" type="text" maxlength="80" value="{{ edit_nfv['model'] if edit_nfv else '' }}" required>
 
-                        <label for="management_ip">Management IP</label>
+                        <label for="management_ip">Manejar IP</label>
                         <input id="management_ip" name="management_ip" type="text" maxlength="15" value="{{ edit_nfv['management_ip'] if edit_nfv else '' }}" required>
 
                         <label for="nfv_status_select">Status</label>
@@ -517,9 +517,9 @@
                             <option value="Offline" {% if edit_nfv and edit_nfv['status'] == 'Offline' %}selected{% endif %}>Offline</option>
                         </select>
 
-                        <button type="submit">{% if edit_nfv %}Save changes{% else %}Add NFV asset{% endif %}</button>
+                        <button type="submit">{% if edit_nfv %}Guardar Cambios{% else %}Añadir NFV asset{% endif %}</button>
                         {% if edit_nfv %}
-                        <a class="secondary-link" href="{{ url_for('index', _anchor='devices-software') }}">Cancel edit</a>
+                        <a class="secondary-link" href="{{ url_for('index', _anchor='devices-software') }}">Cancelar edit</a>
                         {% endif %}
                     </form>
                 </div>
@@ -560,7 +560,7 @@
                             </tr>
                             {% else %}
                             <tr>
-                                <td colspan="{% if is_admin %}7{% else %}6{% endif %}" class="empty-row">No NFV assets registered yet.</td>
+                                <td colspan="{% if is_admin %}7{% else %}6{% endif %}" class="empty-row">No se ha registrado todavía.</td>
                             </tr>
                             {% endfor %}
                         </tbody>
