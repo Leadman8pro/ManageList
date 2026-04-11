@@ -1,9 +1,31 @@
-Para activar el entorno =  c:\Users\maiso\OneDrive\Desktop\Comp465-Final\Proyecto\.venv\Scripts\Activate.ps1
-Para desactivar = deactivate
-Para guardar dependencias = pip freeze > requirements.txt
-Para ver dependencias dentro del entorno = pip list
-Para ver dependencias especificas de = pip show flask
-Para instalar dependendencias = pip install -r requirements.txt
+Para correrlo local en la máquina tienes que seguir estos pasos:
 
-Para proteger la web uso flask
-iniciar con flask es: python main.py
+1. Activar el entorno. Para poder activar el entorno en tu máquina pero en 
+este caso la mia, buscas el path completo de tu máquina
+como el que dejaré aquí =  c:\Users\maiso\OneDrive\Desktop\Comp465-Final\Proyecto\.venv\Scripts\Activate.ps1\
+
+2. Para desactivar el entorno = en el visual studio, en la sección de "Terminal" , tienes que escribir "deactivate".
+
+3. Si estas agregando dependencias o instalando más dependencias, tienes
+que escribir unos comandos en la terminal para que en el archivo que 
+yo pude crear se guarden estas dependencias y el comando es:  pip freeze > requirements.txt
+
+4. Para ver dependencias dentro del entorno = pip list
+
+5. Para ver dependencias especificas de tu entorno para ver el
+flujo de trabajo por ejemplo es = pip show flask 
+
+6. Para instalar dependendencias cuando lo pasas a una máquina o servidores
+nuevos puedes hacer un = pip install -r requirements.txt
+
+7. Una vez hayas activado el entorno donde vas a trabajar, puedes correr en la terminal
+el comando de: python main.py
+
+8. Una vez corras ese comando, te saldrá una IP local de tu maquina que sera un: 127.0.0.1
+con esa IP, accedes a google para ver la página web. 
+
+Posibles errores en el sistema: 
+
+-----------------------------------------------------------------------------------------------------------------
+
+Al desplegar en AWS para poder trabajar en la instancia de EC2 tienes que seguir un proceso de pasos un poco más extensos
