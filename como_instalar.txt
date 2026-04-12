@@ -2,7 +2,7 @@ Para correrlo local en la máquina tienes que seguir estos pasos:
 
 1. Activar el entorno. Para poder activar el entorno en tu máquina pero en 
 este caso la mia, buscas el path completo de tu máquina
-como el que dejaré aquí =  c:\Users\maiso\OneDrive\Desktop\Comp465-Final\Proyecto\.venv\Scripts\Activate.ps1\
+como el que dejaré aquí =  c:\Users\maiso\OneDrive\Desktop\Comp465-Final\Proyecto\.venv\Scripts\Activate.ps1
 
 2. Para desactivar el entorno = en el visual studio, en la sección de "Terminal" , tienes que escribir "deactivate".
 
@@ -29,3 +29,65 @@ Posibles errores en el sistema:
 -----------------------------------------------------------------------------------------------------------------
 
 Al desplegar en AWS para poder trabajar en la instancia de EC2 tienes que seguir un proceso de pasos un poco más extensos
+
+1. Lo primero que harás es entrar al path donde descargaste el .pem y luego ejecutarás
+este comando que en linux sería el chmod
+
+icacls "{Nombre de llaves que creaste}" /inheritance:r
+icacls "{Nombre de llaves que creaste}" /grant:r "$($env:USERNAME):R"
+
+2. Luego de dará un código privado para entrar a tu servidor que le darás un copy
+y lo pegaras directamente en el powershell
+
+3. Una vez entras, puedes esta serie de comandos en el servidor:
+
+git clone "http de la página web"
+
+luego puedes usar un comando para actualizar el sistema que es el:
+
+sudo apt update 
+sudo apt upgrade 
+
+Con estos comando puedes clonar tu repositorio y luego actualizar tu sistema para que este al dia
+
+4. Para poder instalar python, ejecutas:
+
+sudo apt install python3-pip
+sudo apt install python3-virtualenv
+
+5. Para crear el entorno es 
+
+virtualenv venv
+
+6. Para poder activar el entorno es:
+
+source venv/bin/activate
+
+7. Una vez activas el entorno, haces este comando para poder entrar al file que descargaste:
+
+cd ManageList
+
+8. Si deseas descargar las dependencias en tu entorno en aws, tienes que hacer un:
+
+pip3 install -r requirements
+
+9. Como ultimo paso para trabajar el entorno, lo activas haciendo este comando:
+
+python3 main.py
+
+Para poder ver la página en web, es otro proceso eb AWS, para poder hacer esto, tienes que seguir otro patron:
+
+1. Buscar la instancia que vas a desplegar y entras a su resumen de instancia
+
+2. Bajas hasta la sección de Seguridad o security dependiendo el idioma
+
+3. En detalles de seguridad, entras en la segunda opción de abajo que dice "Grupo de seguridad" o "Policy Groups".
+
+4. Luego que logres entrar, vas a editar las reglas de entrada o inbound rules
+
+5. Agregas una nueva regla y en la primera opción colocas TCP Personalizada, le asignas el puerto que
+te muestra al compilar el código y en origen asignas Personalizado. 
+
+6. Al hacer eso, vuelves al inicio donde esta las direcciónes de IP publica y privada
+y entras a la IP pública. Cualquier cosa que no te deje entrar, en el URL asignas http y al final de la IP 
+asignas el puerto. 
