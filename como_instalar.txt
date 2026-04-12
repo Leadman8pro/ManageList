@@ -74,6 +74,8 @@ pip3 install -r requirements
 9. Como ultimo paso para trabajar el entorno, lo activas haciendo este comando:
 
 python3 main.py
+---------------------------------------------------------------------------------------------------------------------------
+
 
 Para poder ver la página en web, es otro proceso eb AWS, para poder hacer esto, tienes que seguir otro patron:
 
