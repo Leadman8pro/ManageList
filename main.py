@@ -13,6 +13,7 @@ DB_PATH = "app.db"
 ADMIN_EMAIL = "admin@managelist.com"
 ADMIN_NAME = "Administrator"
 ADMIN_PASSWORD = "Admin12345!"
+
 datos = [10, 20, 30]
 
 
